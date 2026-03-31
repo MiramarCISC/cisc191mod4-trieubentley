@@ -6,35 +6,38 @@ public class Student {
     private double gpa;
 
     public Student(int id, String name, double gpa) {
-        // TODO validate fields and assign them
+        if (id <= 0) throw new IllegalArgumentException("ID must be greater than 0.");
+        if (name == null || name.isBlank()) throw new IllegalArgumentException("Name must not be null or blank.");
+        if (gpa < 0.0 || gpa > 4.0) throw new IllegalArgumentException("GPA must be between 0.0 and 4.0.");
+        this.id = id;
+        this.name = name;
+        this.gpa = gpa;
     }
 
     public int getId() {
-        // TODO
-        return 0;
+        return id;
     }
 
     public String getName() {
-        // TODO
-        return null;
+        return name;
     }
 
     public double getGpa() {
-        // TODO
-        return 0.0;
+        return gpa;
     }
 
     public void setName(String name) {
-        // TODO validate and assign
+        if (name == null || name.isBlank()) throw new IllegalArgumentException("Name must not be null or blank.");
+        this.name = name;
     }
 
     public void setGpa(double gpa) {
-        // TODO validate and assign
+        if (gpa < 0.0 || gpa > 4.0) throw new IllegalArgumentException("GPA must be between 0.0 and 4.0.");
+        this.gpa = gpa;
     }
 
     @Override
     public String toString() {
-        // TODO
-        return "";
+        return "Student{id=" + id + ", name='" + name + "', gpa=" + gpa + "}";
     }
 }
