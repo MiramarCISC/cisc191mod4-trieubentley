@@ -19,11 +19,17 @@ public class DatabaseInitializer {
                     id INT PRIMARY KEY,
                     title VARCHAR(100) NOT NULL,
                     student_id INT,
-                    FOREIGN KEY (student_id) REFERENCES students(id)
+                    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
                 )""";
+
+        /// ADDED DELETE CASCADE TO MAKE DELETING STUDENT BY ID EASIER
 
         try (Connection conn = DatabaseConfig.getConnection();
              Statement stmt = conn.createStatement()) {
+
+            /// DELETES EXISTING DATA WHEN RUN TO AVOID MESSY REPEATED DATA
+            stmt.execute("DROP TABLE IF EXISTS courses");
+            stmt.execute("DROP TABLE IF EXISTS students");
             stmt.execute(createStudents);
             stmt.execute(createCourses);
             System.out.println("Database initialized successfully.");

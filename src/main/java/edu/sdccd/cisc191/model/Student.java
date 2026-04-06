@@ -1,13 +1,14 @@
 package edu.sdccd.cisc191.model;
 
 public class Student {
-    private int id;
+    private final int id; /// made int final
     private String name;
     private double gpa;
 
     public Student(int id, String name, double gpa) {
         if (id <= 0) throw new IllegalArgumentException("ID must be greater than 0.");
-        if (name == null || name.isBlank()) throw new IllegalArgumentException("Name must not be null or blank.");
+        /// changed from .isBlank() to .trim().isEmpty() to improve validation
+        if (name == null || name.trim().isEmpty()) throw new IllegalArgumentException("Name must not be null or blank.");
         if (gpa < 0.0 || gpa > 4.0) throw new IllegalArgumentException("GPA must be between 0.0 and 4.0.");
         this.id = id;
         this.name = name;

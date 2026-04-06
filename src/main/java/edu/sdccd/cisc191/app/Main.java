@@ -2,8 +2,10 @@ package edu.sdccd.cisc191.app;
 
 import edu.sdccd.cisc191.model.Course;
 import edu.sdccd.cisc191.model.Student;
+import edu.sdccd.cisc191.repository.CourseRepository;
 import edu.sdccd.cisc191.repository.JdbcCourseRepository;
 import edu.sdccd.cisc191.repository.JdbcStudentRepository;
+import edu.sdccd.cisc191.repository.StudentRepository;
 import edu.sdccd.cisc191.service.StudentService;
 import edu.sdccd.cisc191.util.DatabaseInitializer;
 
@@ -16,8 +18,9 @@ public class Main {
         DatabaseInitializer.initialize();
 
         // Create repositories and service
-        JdbcStudentRepository studentRepo = new JdbcStudentRepository();
-        JdbcCourseRepository courseRepo = new JdbcCourseRepository();
+        /// imported StudentRepository and CourseRepository classes to use interfaces for better abstraction
+        StudentRepository studentRepo = new JdbcStudentRepository();
+        CourseRepository courseRepo = new JdbcCourseRepository();
         StudentService service = new StudentService(studentRepo);
 
         // Insert at least 3 students
@@ -56,10 +59,12 @@ public class Main {
 
         // Delete student ID 3 — must delete their courses first (foreign key constraint)
         System.out.println("\n=== Deleting Student ID 3 (Clara) ===");
-        List<Course> clarasCourses = courseRepo.findByStudentId(3);
+        /*List<Course> clarasCourses = courseRepo.findByStudentId(3);
         for (Course c : clarasCourses) {
             courseRepo.deleteById(c.getId());
-        }
+        }*/
+        /// made this block unnecessary after adding ON DELETE CASCADE to DatabaseInitializer
+
         service.removeStudent(3);
         System.out.println("Student ID 3 and their courses deleted.");
 
