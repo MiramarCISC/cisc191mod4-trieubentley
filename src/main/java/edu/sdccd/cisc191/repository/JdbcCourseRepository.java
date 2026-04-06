@@ -64,7 +64,7 @@ public class JdbcCourseRepository implements CourseRepository {
         }
         return courses;
     }
-
+    /*
     @Override
     public void deleteById(int id) {
         String sql = "DELETE FROM courses WHERE id = ?";
@@ -75,5 +75,5 @@ public class JdbcCourseRepository implements CourseRepository {
         } catch (SQLException e) {
             System.out.println("Error deleting course: " + e.getMessage());
         }
-    }
+    }*/
 }
